@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=ymSGqtwCoRR-o93WjgdPceTpNB1MqM1wYqSq410KgUTnKEqZ2sWyttYRVwkpBO65iHMZH-dI6KFCsthFzrUbbg" charset="UTF-8"></script><script src="numberToWords.js"></script>
+    <title>Document</title>
+    <style>
+        main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            
+            
+        }
+        input:focus{
+            outline:none;
+            box-shadow:0px 0px 15px 2px rgb(255, 255, 255);
+            border:2px solid rgb(253, 253, 40);
+           
+           
+        }
+        input{
+            border:1px solid rgb(176, 176, 176);
+            height: 40px;
+            font-size: 18px;
+            width: 100%;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        main>div{
+            
+           padding: 0px 20px 10px 20px;
+            border: 1px solid rgb(196, 193, 193);
+            border-radius: 15px;
+            box-shadow: 0px 0px 5px rgb(196, 193, 193);
+            color: white;
+        }
+        button{
+            width: 100%;
+            border: none;
+            padding: 10px;
+            background-color: rgb(255, 196, 0);;
+            font-size: 15px;
+            font-weight:600;
+            color: white;
+            border-radius: 5px ;
+            margin-top: 20px;
+           
+        }
+    </style>
+    <script>
+        function backgroundChange(){
+            var div=document.querySelector("div");
+            color=parseInt(Math.random()*1000000);
+            div.style.backgroundColor="#"+color
+           
+        }
+        
+        function ConvertInWord(){
+            var num1=["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten",
+                    "Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen",
+                    "Eighteen","Nineteen"];
+            var num2=["","","Twenty","Thirty","Fourty","Fifty","Sixty","Seventy","Eighty","Ninety","Hundred"];
+            var number=document.getElementById("number").value;
+            var [numArray1,numArray2,numArray3]=number.split("");
+
+            flag=""
+           if(number==""){
+            flag="Plaese Enter Value In Textbox"
+           }else{
+            if(number>=0 && number<20){
+                flag=num1[number]
+            }else if(number>=20 && number<100){
+                flag=`${num2[numArray1]} ${num1[numArray2]}`;
+            }else if(number>=100 && number<1000){
+                if(numArray2==0){
+                    flag=`${num1[numArray1]} Hundred ${num1[numArray3]}` ;
+                }else  if(numArray2<2){
+                    flag=`${num1[numArray1]} Hundred ${num1[([numArray2,numArray3]).join("")]}` ;
+                } else{
+                    flag=`${num1[numArray1]} Hundred ${num2[numArray2]} ${num1[numArray3]}` ;
+                }
+            }else{
+                flag="Number Between 1 to 1000 only"
+            }
+           }
+            document.querySelector("h3").innerHTML=flag;
+            document.getElementById("number").value="";
+            document.getElementById("number").focus();
+            
+        }
+        setInterval(backgroundChange, 1000);
+    </script>
+    
+   
+</head>
+<body class="container-fluid">
+    <main>
+        <div>
+            <h2>Convert Number Into Words</h2>
+            <input type="number"id="number"value="1">
+            <button onclick="ConvertInWord()">Convert</button>
+            <h3 align="center"style="font-family:arial;text-transform: uppercase;">One</h3>
+        </div>
+    </main>
+</body>
+</html>
